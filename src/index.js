@@ -17,10 +17,17 @@ function install (Vue, options = {}) {
   if (config.router !== undefined) {
     config.router.afterEach((to, from) => {
       // Make a page call for each navigation event
-      window.analytics.page(config.pageCategory, to.name || '', {
+      var properties = {
         path: to.fullPath,
         referrer: from.fullPath
-      })
+      };
+
+      if (window.smintIoPluginScope !== undefined &&
+          window.smintIoPluginScope) {
+        properties.pluginScope = window.smintIoPluginScope;
+      }
+
+      window.analytics.page(config.pageCategory, to.name || '', properties);
     })
   }
 
