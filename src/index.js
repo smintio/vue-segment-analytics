@@ -27,6 +27,16 @@ function install (Vue, options = {}) {
         properties.pluginScope = window.smintIoPluginScope;
       }
 
+      if (window.smintIoPluginHost !== undefined &&
+          window.smintIoPluginHost) {
+        properties.pluginHost = window.smintIoPluginHost;
+      }
+
+      if (window.smintIoPluginVersion !== undefined &&
+          window.smintIoPluginVersion) {
+        properties.pluginVersion = window.smintIoPluginVersion;
+      }
+
       window.analytics.page(config.pageCategory, to.name || '', properties);
     })
   }
